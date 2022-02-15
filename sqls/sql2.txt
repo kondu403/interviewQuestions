@@ -18,3 +18,17 @@ ballno runs
 16,W
 
 Need for each over number of runs, wickets, etc
+
+
+Ans:
+Hive:
+
+with sub as (
+Select ballno,runs
+,ceil(ballno/6) as overno
+,case when runs='W' then 1 else 0 end wic
+,case when runs ='W' then 0 else runs end runs
+from table
+)
+select overno, sum(wic) wickets, sum(runs) runs from sub
+group by overno;
